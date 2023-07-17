@@ -1,0 +1,20 @@
+{%if form.username.errors %}
+    {%for error in form.username.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {%endfor%}
+{%endif%}
+{%if form.email.errors %}
+    {%for error in form.email.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {%endfor%}
+{%endif%}
+{%if form.password.errors %}
+    {%for error in form.password.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {%endfor%}
+{%endif%}
+{%if form.confirm.errors %}
+    {%for error in form.confirm.errors %}
+        <p class="alert alert-danger">{{error}}</p>
+    {%endfor%}
+{%endif%}

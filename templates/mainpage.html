@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+  />
+  <!-- <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box}
+        input{
+            float: left;
+            width: 50%;
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+        input:hover {
+        opacity:1;
+        }
+        .header{
+            text-align: center;
+        }
+        .hello{
+            border-style: double;
+            border-width: 1px;
+            margin: 10px 10px 10px 10px;
+        }
+    </style> -->
+  <style>
+    *,
+    *::before,
+    *::after {
+      font-family: "Poppins", sans-serif !important;
+    }
+
+    body {
+      padding: 1rem 1.2rem;
+    }
+
+    .header {
+      text-align: center;
+      font-weight: 500;
+    }
+
+    input {
+      outline: none;
+      border: none;
+      background-color: #04aa6d;
+      color: white;
+      border-radius: 0.3rem;
+      width: 100%;
+      display: block;
+      padding: 0.44em 1rem;
+      font-size: 1.2rem;
+      text-transform: capitalize;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btns {
+      display: flex;
+      width: 100%;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    form {
+      flex-grow: 1;
+    }
+
+    .crd {
+      border: 1px solid gray;
+      border-radius: 1rem;
+      padding: 0.8rem 1.5rem;
+    }
+
+    .crd-author {
+      background-color: #04aa6d;
+      border-radius: 999px;
+      color: white;
+      padding: 0.3rem 1rem;
+      text-align: center;
+      width: fit-content;
+    }
+
+    .crd-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .crds > * + * {
+      margin: 1.5rem 0;
+    }
+
+    .crd h4 {
+      font-size: 1.1.rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+      flex-grow: 1;
+    }
+
+    .crd > p {
+      background-color: #f3f3f3;
+      padding: 1rem;
+      border-radius: 0.6rem;
+    }
+
+    .lds-ellipsis {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: auto;
+    }
+    .lds-ellipsis div {
+      position: absolute;
+      top: 33px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: black;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .lds-ellipsis div:nth-child(1) {
+      left: 8px;
+      animation: lds-ellipsis1 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(2) {
+      left: 8px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(3) {
+      left: 32px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(4) {
+      left: 56px;
+      animation: lds-ellipsis3 0.6s infinite;
+    }
+    @keyframes lds-ellipsis1 {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes lds-ellipsis3 {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0);
+      }
+    }
+    @keyframes lds-ellipsis2 {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(24px, 0);
+      }
+    }
+  </style>
+
+  <head>
+    <title>welcome!!!</title>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>Simple Blog</h1>
+      <div id="header-content">
+        <h3>There are currently <span id="count">0</span> users registered</h3>
+      </div>
+
+      <div class="lds-ellipsis" id="loading" style="display: none">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    {%include 'inc/flashes.html'%}
+    <div class="btns">
+      {% if current_user.is_authenticated %}
+      <form action="/createpost" class="submit" method="get">
+        <input name="createpost" type="submit" value="createpost" />
+      </form>
+      <form action="/logout" class="submit" method="get">
+        <input name="logout" type="submit" value="logout" />
+      </form>
+      {% else %}
+      <form action="/signup" class="submit" method="get">
+        <input name="signup" type="submit" value="signup" />
+      </form>
+      <form action="/login" class="submit" method="get">
+        <input name="login" type="submit" value="login" />
+      </form>
+      {% endif %}
+    </div>
+    <div class="crds">
+      {% for post in posts %}
+      <div class="crd">
+        <div class="crd-header">
+          <h4>{{post.title}}</h4>
+          <p class="crd-author">{{post.author.username}}</p>
+        </div>
+        <p>{{post.content}}</p>
+      </div>
+      {%endfor%}
+    </div>
+
+    <script>
+      function setCount() {
+        const headerContent = document.getElementById("header-content");
+        const loading = document.getElementById("loading");
+
+        headerContent.style.display = "none";
+        loading.style.display = "block";
+
+        setTimeout(async () => {
+          const res = await fetch("http://127.0.0.1:5000/count");
+
+          const count = await res.text();
+
+          document.getElementById("count").innerHTML = count;
+
+          headerContent.style.display = "block";
+          loading.style.display = "none";
+        }, 1000);
+      }
+
+      setCount();
+    </script>
+  </body>
+</html>
